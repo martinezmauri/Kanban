@@ -1,0 +1,43 @@
+.hero{
+    display: flex;
+    align-items: center;
+    background-color: #d5e5f3;
+    justify-content: space-around;
+}
+.navigation{
+    display: flex;
+    padding: 5px 15px;
+    gap: 10vw;
+}
+.buttonNavigation img{
+    width: 4vw;
+    filter: drop-shadow(
+    0 0 5px rgba(175, 174, 174, 0.5)
+    );
+
+}
+.buttonNavigation{
+    display: flex;
+    transition: all 1s ease;
+    align-items: center;
+    padding: 0 20px;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+}
+.buttonNavigation p{
+    color: rgb(77, 78, 80);
+    position: absolute;
+    opacity: 0;
+    transform: translateX(-10px);
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.1rem;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.buttonNavigation:hover p{
+    position: relative;
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 1s ease;
+}

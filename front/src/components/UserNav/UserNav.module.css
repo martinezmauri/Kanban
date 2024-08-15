@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    gap: 2vw;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: aliceblue;
+}
+a{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.1rem;
+    color: rgb(68, 70, 71);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+    align-items: center;
+}

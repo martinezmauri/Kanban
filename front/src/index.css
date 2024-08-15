@@ -1,0 +1,84 @@
+/* CSS Reset Básico */
+
+/* Elimina márgenes, paddings y establece box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Asegura que las imágenes no excedan el tamaño del contenedor */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Elimina decoraciones de enlaces */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remueve bullets de listas y margen adicional */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Establece fuentes y tamaño de texto */
+body {
+  line-height: 1.6;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+}
+
+/* Forzando el diseño del borde a ser más consistente */
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* Asegura que botones y enlaces tengan cursores adecuados */
+button,
+a {
+  cursor: pointer;
+}
+
+/* Elimina estilos predeterminados de tablas */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+/* Resetea el estilo de formularios */
+input,
+textarea,
+select {
+  border-radius: 0;
+  outline: none;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+

@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 75vh;
+    height: 100vh;
 }
 .container{
     background-color: antiquewhite;
     padding: 20px;
-    width: 25%;
     border-radius: 8px;
+    width: 30%;
     position: relative;
 }
 .field{

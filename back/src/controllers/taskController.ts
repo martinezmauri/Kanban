@@ -40,7 +40,6 @@ export const getTaskByUserId = async (
   try {
     const tasks = await getTaskByUserIdService(id);
     if (tasks) res.status(200).json(tasks);
-    else res.status(404).json({ message: "No existe una tarea con ese id" });
   } catch (error) {
     res.status(500).json({ message: "Error interno del servidor ", error });
   }

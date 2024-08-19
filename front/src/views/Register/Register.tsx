@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { createToast } from "../../helpers/Toast";
+import { validateRegister } from "../../helpers/validate";
+import styles from "./Register.module.css";
 
 export const Register = () => {
   const [registerData, setRegisterData] = useState({
@@ -9,9 +11,11 @@ export const Register = () => {
     birthdate: "",
     username: "",
     password: "",
+    confirmPassword: "",
   });
   const [submit, setSubmit] = useState(false);
   const Toast = createToast();
+  const [errors, setErrors] = useState({});
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -20,10 +24,27 @@ export const Register = () => {
       ...registerData,
       [name]: value,
     });
+    const newErrors = validateRegister({ ...registerData, [name]: value });
+    setErrors(newErrors);
   };
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    setSubmit(true);
+    const validationErrors = validateRegister(registerData);
+    setErrors(validationErrors);
+    if (
+      validationErrors.usernameError ||
+      validationErrors.passwordError ||
+      validationErrors.confirmPasswordError ||
+      validationErrors.nameError ||
+      validationErrors.emailError ||
+      validationErrors.birthdateError
+    ) {
+      console.log(validationErrors);
+
+      setSubmit(false);
+    } else {
+      setSubmit(true);
+    }
   };
   const handleClearInputs = (): void => {
     setRegisterData({
@@ -32,6 +53,7 @@ export const Register = () => {
       birthdate: "",
       username: "",
       password: "",
+      confirmPassword: "",
     });
   };
   useEffect(() => {
@@ -72,9 +94,9 @@ export const Register = () => {
   }, [submit, registerData]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <section>
+    <div className={styles.hero}>
+      <form onSubmit={handleSubmit} className={styles.container}>
+        <section className={styles.field}>
           <label htmlFor="name">Nombre: </label>
           <input
             type="text"
@@ -112,6 +134,14 @@ export const Register = () => {
             type="password"
             name="password"
             value={registerData.password}
+            onChange={handleChange}
+          />
+
+          <label htmlFor="password">Confirmar Contraseña: </label>
+          <input
+            type="password"
+            name="confirmPassword"
+            value={registerData.confirmPassword}
             onChange={handleChange}
           />
         </section>

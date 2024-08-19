@@ -15,4 +15,4 @@
 ### Extras:
 
 - El usuario debe poder asignar las tareas a otro usuario existente en la aplicacion.
-- Llevar la autenticacion a un plus de seguridad. (Auth0)
+- Llevar la autenticacion a un plus de seguridad. (Auth0)?

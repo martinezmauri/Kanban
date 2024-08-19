@@ -1,28 +1,41 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import styles from "./Login.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { createToast } from "../../helpers/Toast";
+import { UserContext } from "../../context/UserContext.tsx";
+import { LoginData } from "./LoginData.interface.ts";
+import { validateLogin } from "../../helpers/validate.ts";
 
-export const Login = () => {
-  const [dataLogin, setDataLogin] = useState({
+export const Login: React.FC = () => {
+  const [dataLogin, setDataLogin] = useState<LoginData>({
     username: "",
     password: "",
   });
   const [submit, setSubmit] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
+  const [errors, setErrors] = useState({});
 
-  const handleChange = (event: any): void => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
     setDataLogin({
       ...dataLogin,
       [name]: value,
     });
+    const newErrors = validateLogin({ ...dataLogin, [name]: value });
+    setErrors(newErrors);
   };
 
-  const handleSubmit = (event: any): void => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    setSubmit(true);
+    const validationErrors = validateLogin(dataLogin);
+    setErrors(validationErrors);
+    if (validationErrors.usernameError || validationErrors.passwordError) {
+      setSubmit(false);
+    } else {
+      setSubmit(true);
+    }
   };
 
   const Toast = createToast();
@@ -46,13 +59,11 @@ export const Login = () => {
             }
           );
           if (response.status === 200) {
+            setUser(response.data.user);
             handleClearInputs();
             Toast.fire({
               icon: "success",
               title: "Login in successfully",
-              imageUrl: response.data.user.avatar,
-              imageHeight: 50,
-              imageAlt: "Avatar user",
             });
 
             navigate("/myTasks");
@@ -76,7 +87,7 @@ export const Login = () => {
   return (
     <div className={styles.hero}>
       <form className={styles.container} onSubmit={handleSubmit}>
-        <section>
+        <section className={styles.field}>
           <label htmlFor="username">Username: </label>
           <input
             type="text"
@@ -84,9 +95,10 @@ export const Login = () => {
             id="username"
             value={dataLogin.username}
             onChange={handleChange}
+            placeholder=" "
           />
         </section>
-        <section>
+        <section className={styles.field}>
           <label htmlFor="password">Password: </label>
           <input
             type="password"
@@ -94,6 +106,7 @@ export const Login = () => {
             id="password"
             value={dataLogin.password}
             onChange={handleChange}
+            placeholder=" "
           />
         </section>
         <button>Iniciar sesion</button>

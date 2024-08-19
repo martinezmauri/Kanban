@@ -1,0 +1,15 @@
+.hero{
+    display: flex;
+    justify-content: space-evenly;
+}
+.kanbanColumn{
+    border: 1px solid black;
+    width: 20%;
+    height: auto;
+}
+.kanbanColumn h3{
+    border-bottom: 1px solid black;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+}
